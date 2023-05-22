@@ -36,7 +36,7 @@ Pool pool_alloc() {
 
     // Using pointer arithmetics to create linked list of memory blocks
 
-    for (uint64_t i = 0; i < BLOCK_NUMBER; i++)
+    for (uint16_t i = 0; i < BLOCK_NUMBER; i++)
     {
         uint8_t* tmp = (uint8_t*)b;
         tmp += BLOCK_SIZE;
@@ -60,7 +60,7 @@ Pool pool_alloc() {
         return p;
     }
     Block *b = p.block_start;
-    for (uint64_t i = 0; i < BLOCK_NUMBER; i++)
+    for (uint16_t i = 0; i < BLOCK_NUMBER; i++)
     {
         uint8_t* tmp = (uint8_t*)b;
         tmp += BLOCK_SIZE;

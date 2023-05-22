@@ -18,8 +18,8 @@ struct Block{
 };
 
 typedef struct{
-    uint64_t block_number;
-    uint64_t block_size;
+    uint16_t block_number;
+    uint16_t block_size;
     Block* block_start;
 } Pool;
 

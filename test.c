@@ -25,15 +25,15 @@ void test_allocating_all_pool(void) {
         return;
     }
     uint8_t* a[BLOCK_NUMBER];
-    uint64_t sum = 0;
-    for (uint64_t i = 0; i < BLOCK_NUMBER; i++)
+    uint32_t sum = 0;
+    for (uint16_t i = 0; i < BLOCK_NUMBER; i++)
     {
         a[i] = (uint8_t*)block_alloc(&pool);
         if(a[i] == NULL) {
             TEST_FAIL_MESSAGE("Block not allocated");
             return;
         }
-        for (uint64_t j = 0; j < BLOCK_SIZE; j++)
+        for (uint16_t j = 0; j < BLOCK_SIZE; j++)
         {
             a[i][j] = 1;
             sum+=a[i][j];
@@ -63,18 +63,18 @@ void test_two_threads(void) {
 
 void *just_some_adding(void *ptr) {
     uint8_t* numbers[BLOCK_NUMBER/2];
-    uint64_t sum = 0;
+    uint32_t sum = 0;
     struct args a = *(struct args*) ptr;
     Pool * pool;
     pool = a.pool;
-    for (uint64_t i = 0; i < BLOCK_NUMBER/2; i++)
+    for (uint16_t i = 0; i < BLOCK_NUMBER/2; i++)
     {
         numbers[i] = (uint8_t*)block_alloc(pool);
         if(numbers[i] == NULL) {
             TEST_FAIL_MESSAGE("Block not allocated");
             return NULL;
         }
-        for (uint64_t j = 0; j < BLOCK_SIZE; j++)
+        for (uint16_t j = 0; j < BLOCK_SIZE; j++)
         {
             numbers[i][j] = a.value;
             sum+=numbers[i][j];
@@ -102,7 +102,7 @@ void test_two_threads_with_block_dealloc(void) {
 
 void *test_dealloc(void *ptr) {
     uint8_t* x, * y, * z;
-    uint64_t sum = 0;
+    uint32_t sum = 0;
     struct args a = *(struct args*) ptr;
     Pool * pool;
     pool = a.pool;
@@ -123,7 +123,7 @@ void *test_dealloc(void *ptr) {
     }
     block_dealloc(pool, (Block*) y);
     y = NULL;
-    for (uint8_t i = 0; i < BLOCK_SIZE; i++)
+    for (uint16_t i = 0; i < BLOCK_SIZE; i++)
     {
         x[i] = a.value;
         z[i] = (a.value+1);
